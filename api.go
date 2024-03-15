@@ -76,27 +76,27 @@ var (
 
 	// Find
 	BpayFindAddress = utils.API{
-		Url:    "/search/api/v1/FindAddress",
+		Url:    "/search/api/v1/Search/FindAddress",
 		Method: http.MethodGet,
 	}
 	BpayFindCid = utils.API{
-		Url:    "/search/api/v1/FindCid?Cid={{cid}}",
+		Url:    "/search/api/v1/Search/FindCid?Cid={{cid}}",
 		Method: http.MethodGet,
 	}
 	BpayFindElectric = utils.API{
-		Url:    "/search/api/v1/FindElictric?UserId={{userId}}",
+		Url:    "/search/api/v1/Search/FindElictric?UserId={{userId}}",
 		Method: http.MethodGet,
 	}
 	BpayFindUnivision = utils.API{
-		Url:    "/search/api/v1/FindUnivision?Custno={{custNo}}",
+		Url:    "/search/api/v1/Search/FindUnivision?Custno={{custNo}}",
 		Method: http.MethodGet,
 	}
 	BpayFindSkymedia = utils.API{
-		Url:    "/search/api/v1/FindSkymedia?BillerUserId={{billerUserId}}",
+		Url:    "/search/api/v1/Search/FindSkymedia?BillerUserId={{billerUserId}}",
 		Method: http.MethodGet,
 	}
 	BpayFindOnlineBiller = utils.API{
-		Url:    "/search/api/v1/FindOnlineBiller?BillerUserId={{billerUserId}}",
+		Url:    "/search/api/v1/Search/FindOnlineBiller?BillerUserId={{billerUserId}}",
 		Method: http.MethodGet,
 	}
 
@@ -193,7 +193,7 @@ func (b *bpay) httpRequest(body interface{}, api utils.API, urlExt string, custo
 	if res.StatusCode != 200 {
 		return nil, errors.New(string(res.Status))
 	}
-	response, _ = io.ReadAll(res.Body)
 	defer res.Body.Close()
+	response, _ = io.ReadAll(res.Body)
 	return
 }
