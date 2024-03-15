@@ -12,14 +12,15 @@ type (
 		Data BpayLoginData `json:"data"`
 	}
 	BpayLoginData struct {
-		TokenType    string `json:"tokenType"`
-		RefreshToken string `json:"refreshToken"`
-		ExpiresIn    int    `json:"expiresIn"`
-		AccessToken  string `json:"accessToken"`
-		UserId       int    `json:"userId"`
-		RoleId       int    `json:"roleId"`
-		JTI          string `json:"jti"`
-		Username     string `json:"username"`
+		TokenType       string `json:"tokenType"`       //
+		RefreshToken    string `json:"refreshToken"`    //
+		ExpiresIn       int    `json:"expiresIn"`       //
+		AccessToken     string `json:"accessToken"`     //
+		UserId          int    `json:"userId"`          //
+		RoleId          int    `json:"roleId"`          //
+		JTI             int    `json:"jti"`             //
+		PaymentMethodID int    `json:"paymentMethodId"` //
+		Username        string `json:"username"`        //
 	}
 
 	// Customer request and response
@@ -49,8 +50,8 @@ type (
 
 	//Constants request and response
 	BpayConstantResponse struct {
-		BpayResponse
-		Data []BpayConstantData `json:"data"`
+		// BpayResponse
+		Data []BpayConstantData
 	}
 	BpayConstantData struct {
 		ID   int64  `json:"id"`
