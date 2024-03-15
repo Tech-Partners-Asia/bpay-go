@@ -9,6 +9,9 @@ type (
 	}
 	BpayLoginResponse struct {
 		BpayResponse
+		Data BpayLoginData `json:"data"`
+	}
+	BpayLoginData struct {
 		TokenType    string `json:"tokenType"`
 		RefreshToken string `json:"refreshToken"`
 		ExpiresIn    int    `json:"expiresIn"`

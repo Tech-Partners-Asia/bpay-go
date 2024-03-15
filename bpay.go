@@ -11,7 +11,7 @@ type bpay struct {
 	endpoint    string
 	username    string
 	password    string
-	loginObject *BpayLoginResponse
+	loginObject *BpayLoginData
 }
 
 type Bpay interface {

@@ -115,7 +115,7 @@ var (
 	}
 )
 
-func (b *bpay) auth() (authRes BpayLoginResponse, err error) {
+func (b *bpay) auth() (authRes BpayLoginData, err error) {
 	if b.loginObject != nil {
 		expireInA := time.Unix(int64(b.loginObject.ExpiresIn), 0)
 		expireInB := expireInA.Add(time.Duration(-12) * time.Hour)
@@ -144,7 +144,7 @@ func (b *bpay) auth() (authRes BpayLoginResponse, err error) {
 	if err != nil {
 		return
 	}
-
+	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
 		return authRes, fmt.Errorf("%s-QPay auth response: %s", time.Now().Format(utils.TimeFormatYYYYMMDDHHMMSS), res.Status)
 	}
@@ -153,10 +153,11 @@ func (b *bpay) auth() (authRes BpayLoginResponse, err error) {
 	if err != nil {
 		return authRes, err
 	}
-
-	json.Unmarshal(responseBody, &authRes)
-
-	defer res.Body.Close()
+	var resp BpayLoginResponse
+	if err := json.Unmarshal(responseBody, &resp); err != nil {
+		return authRes, err
+	}
+	authRes = resp.Data
 	return authRes, nil
 }
 
