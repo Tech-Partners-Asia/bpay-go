@@ -25,10 +25,10 @@ type Bpay interface {
 	GroupAddBills(input BpayGroupAddBillsRequest, id string, customerId int) (BpayGroupAddBillsResponse, error)
 	GroupBills(id string, customerId int) (BpayGroupBillsResponse, error)
 
-	ConstantAimagHot() (BpayConstantResponse, error)
-	ConstantSumDuureg(aimagHotId int) (BpayConstantResponse, error)
-	ConstantBagKhoroo(aimagHotId, sumDuuregId int) (BpayConstantResponse, error)
-	ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) (BpayConstantResponse, error)
+	ConstantAimagHot() ([]BpayConstantData, error)
+	ConstantSumDuureg(aimagHotId int) ([]BpayConstantData, error)
+	ConstantBagKhoroo(aimagHotId, sumDuuregId int) ([]BpayConstantData, error)
+	ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) ([]BpayConstantData, error)
 
 	FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, customerId int) (BpayFindResponse, error)
 	FindCid(cid string, customerId int) (BpayFindResponse, error)
@@ -158,69 +158,57 @@ func (b *bpay) GroupBills(id string, customerId int) (BpayGroupBillsResponse, er
 }
 
 // Constants
-func (b *bpay) ConstantAimagHot() (BpayConstantResponse, error) {
+func (b *bpay) ConstantAimagHot() ([]BpayConstantData, error) {
 	res, err := b.httpRequest(nil, BpayConstantAimagHot, "", 0)
 	if err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	var response BpayConstantResponse
+	var response []BpayConstantData
 	if err := json.Unmarshal(res, &response); err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	// if !response.ResponseCode {
-	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
-	// }
 	return response, nil
 }
 
-func (b *bpay) ConstantSumDuureg(aimagHotId int) (BpayConstantResponse, error) {
+func (b *bpay) ConstantSumDuureg(aimagHotId int) ([]BpayConstantData, error) {
 	aimagHotIdstr := strconv.Itoa(aimagHotId)
 	res, err := b.httpRequest(nil, BpayConstantSumDuureg, aimagHotIdstr, 0)
 	if err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	var response BpayConstantResponse
+	var response []BpayConstantData
 	if err := json.Unmarshal(res, &response); err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	// if !response.ResponseCode {
-	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
-	// }
 	return response, nil
 }
 
-func (b *bpay) ConstantBagKhoroo(aimagHotId, sumDuuregId int) (BpayConstantResponse, error) {
+func (b *bpay) ConstantBagKhoroo(aimagHotId, sumDuuregId int) ([]BpayConstantData, error) {
 	aimagHotIdstr := strconv.Itoa(aimagHotId)
 	sumDuuregIdstr := strconv.Itoa(sumDuuregId)
 	res, err := b.httpRequest(nil, BpayConstantBagKhoroo, aimagHotIdstr+"/"+sumDuuregIdstr, 0)
 	if err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	var response BpayConstantResponse
+	var response []BpayConstantData
 	if err := json.Unmarshal(res, &response); err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	// if !response.ResponseCode {
-	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
-	// }
 	return response, nil
 }
 
-func (b *bpay) ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) (BpayConstantResponse, error) {
+func (b *bpay) ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) ([]BpayConstantData, error) {
 	aimagHotIdstr := strconv.Itoa(aimagHotId)
 	sumDuuregIdstr := strconv.Itoa(sumDuuregId)
 	bagKhorooIdstr := strconv.Itoa(bagKhorooId)
 	res, err := b.httpRequest(nil, BpayConstantBair, aimagHotIdstr+"/"+sumDuuregIdstr+"/"+bagKhorooIdstr, 0)
 	if err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	var response BpayConstantResponse
+	var response []BpayConstantData
 	if err := json.Unmarshal(res, &response); err != nil {
-		return BpayConstantResponse{}, err
+		return nil, err
 	}
-	// if !response.ResponseCode {
-	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
-	// }
 	return response, nil
 }
 
