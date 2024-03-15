@@ -164,7 +164,9 @@ func (b *bpay) ConstantAimagHot() (BpayConstantResponse, error) {
 		return BpayConstantResponse{}, err
 	}
 	var response BpayConstantResponse
-	json.Unmarshal(res, &response)
+	if err := json.Unmarshal(res, &response); err != nil {
+		return BpayConstantResponse{}, err
+	}
 	// if !response.ResponseCode {
 	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
 	// }
@@ -178,7 +180,9 @@ func (b *bpay) ConstantSumDuureg(aimagHotId int) (BpayConstantResponse, error) {
 		return BpayConstantResponse{}, err
 	}
 	var response BpayConstantResponse
-	json.Unmarshal(res, &response)
+	if err := json.Unmarshal(res, &response); err != nil {
+		return BpayConstantResponse{}, err
+	}
 	// if !response.ResponseCode {
 	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
 	// }
@@ -193,7 +197,9 @@ func (b *bpay) ConstantBagKhoroo(aimagHotId, sumDuuregId int) (BpayConstantRespo
 		return BpayConstantResponse{}, err
 	}
 	var response BpayConstantResponse
-	json.Unmarshal(res, &response)
+	if err := json.Unmarshal(res, &response); err != nil {
+		return BpayConstantResponse{}, err
+	}
 	// if !response.ResponseCode {
 	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
 	// }
@@ -209,7 +215,9 @@ func (b *bpay) ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) (BpayConst
 		return BpayConstantResponse{}, err
 	}
 	var response BpayConstantResponse
-	json.Unmarshal(res, &response)
+	if err := json.Unmarshal(res, &response); err != nil {
+		return BpayConstantResponse{}, err
+	}
 	// if !response.ResponseCode {
 	// 	return BpayConstantResponse{}, errors.New(response.ResponseMsg)
 	// }
