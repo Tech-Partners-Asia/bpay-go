@@ -30,7 +30,7 @@ type Bpay interface {
 	ConstantBagKhoroo(aimagHotId, sumDuuregId int) ([]BpayConstantData, error)
 	ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) ([]BpayConstantData, error)
 
-	FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, customerId int) (BpayFindResponse, error)
+	FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, customerId int) (BpayFindAddressResponse, error)
 	FindCid(cid string, customerId int) (BpayFindResponse, error)
 	FindElectric(userId string, customerId int) (BpayFindResponse, error)
 	FindUnivision(custNo string, customerId int) (BpayFindResponse, error)
@@ -214,16 +214,16 @@ func (b *bpay) ConstantBair(aimagHotId, sumDuuregId, bagKhorooId int) ([]BpayCon
 
 // Find
 
-func (b *bpay) FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, customerId int) (BpayFindResponse, error) {
+func (b *bpay) FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, customerId int) (BpayFindAddressResponse, error) {
 	query := fmt.Sprintf("?AimagId=%d&SumId=%d&KhorooId=%d&BairNum=%d&XaalgaNum=%d", aimagId, sumId, khorooId, bairNum, haalgaNum)
 	res, err := b.httpRequest(nil, BpayFindAddress, query, customerId)
 	if err != nil {
-		return BpayFindResponse{}, err
+		return BpayFindAddressResponse{}, err
 	}
-	var response BpayFindResponse
+	var response BpayFindAddressResponse
 	json.Unmarshal(res, &response)
 	if !response.ResponseCode {
-		return BpayFindResponse{}, errors.New(response.ResponseMsg)
+		return BpayFindAddressResponse{}, errors.New(response.ResponseMsg)
 	}
 	return response, nil
 }

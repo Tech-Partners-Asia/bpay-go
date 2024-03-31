@@ -14,12 +14,12 @@ type (
 	BpayLoginData struct {
 		TokenType       string `json:"tokenType"`       //
 		RefreshToken    string `json:"refreshToken"`    //
-		ExpiresIn       int    `json:"expiresIn"`       //
+		ExpiresIn       int64  `json:"expiresIn"`       //
 		AccessToken     string `json:"accessToken"`     //
-		UserId          int    `json:"userId"`          //
-		RoleId          int    `json:"roleId"`          //
-		JTI             int    `json:"jti"`             //
-		PaymentMethodID int    `json:"paymentMethodId"` //
+		UserId          int64  `json:"userId"`          //
+		RoleId          int64  `json:"roleId"`          //
+		JTI             int64  `json:"jti"`             //
+		PaymentMethodID int64  `json:"paymentMethodId"` //
 		Username        string `json:"username"`        //
 	}
 
@@ -45,14 +45,9 @@ type (
 	}
 	BpayCustomerCheckResponse struct {
 		BpayResponse
-		Data string `json:"data"` // Хэрэглэгчийн BPAY рүү нэвтрэхэд таних код
+		Data string `json:"data"` // Хэрэглэгчийн BPAY рүү нэвтрэхэд таних код``
 	}
 
-	//Constants request and response
-	BpayConstantResponse struct {
-		// BpayResponse
-		Data []BpayConstantData
-	}
 	BpayConstantData struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
@@ -73,8 +68,8 @@ type (
 	}
 
 	BpayGroupListRequest struct {
-		PageNo  int               `json:"pageNo"`
-		PerPage int               `json:"perPage"`
+		PageNo  int64             `json:"pageNo"`
+		PerPage int64             `json:"perPage"`
 		Sort    string            `json:"sort"`
 		FIlter  []BpayGroupFilter `json:"filter"`
 	}
@@ -107,6 +102,18 @@ type (
 	}
 
 	// Find request and response
+
+	BpayFindAddressResponse struct {
+		BpayResponse
+		Data []BpayAddressData `json:"data"`
+	}
+	BpayAddressData struct {
+		Name    string `json:"name"`
+		CID     string `json:"cid"`
+		Address string `json:"address"`
+		Count   int64  `json:"count"`
+	}
+
 	BpayFindResponse struct {
 		BpayResponse
 		Data []BpayFindData `json:"data"`
@@ -115,43 +122,43 @@ type (
 		ID          int64          `json:"id"`
 		Name        string         `json:"name"`
 		Code        string         `json:"code"`
-		TotalAmount int            `json:"totalAmount"`
+		TotalAmount float64        `json:"totalAmount"`
 		ProviderID  int64          `json:"providerId"`
 		BIlls       []BpayBillData `json:"bills"`
 	}
 	BpayBillData struct {
-		ID          int64  `json:"id"`
-		BillID      string `json:"billId"`
-		Code        string `json:"code"`        // Хэрэглэгчийн CID код
-		BillAmount  int    `json:"billAmount"`  // Төлөх дүн
-		LossAmount  int    `json:"lossAmount"`  // Алдангийн дүн
-		TotalAmount int    `json:"totalAmount"` // Нэхэмжилсэн дүн
-		PaidAmount  int    `json:"paidAmount"`  // Төлбөл зохих дүн
-		Year        int    `json:"year"`
-		Month       int    `json:"month"`
-		Name        string `json:"name"`
-		OrgTypeID   int64  `json:"orgTypeId"`
-		OrgName     string `json:"orgName"`
-		ProviderID  int64  `json:"providerId"`
-		CustomerID  int64  `json:"customerId"`
-		StatusID    int64  `json:"statusId"`
+		ID          int64   `gorm:"column:id" json:"id"`
+		BillID      string  `gorm:"column:bill_id" json:"billId"`
+		Code        string  `gorm:"column:code" json:"code"`                // Хэрэглэгчийн CID код
+		BillAmount  float64 `gorm:"column:bill_amount" json:"billAmount"`   // Төлөх дүн
+		LossAmount  float64 `gorm:"column:loss_amount" json:"lossAmount"`   // Алдангийн дүн
+		TotalAmount float64 `gorm:"column:total_amount" json:"totalAmount"` // Нэхэмжилсэн дүн
+		PaidAmount  float64 `gorm:"column:paid_amount" json:"paidAmount"`   // Төлбөл зохих дүн
+		Year        int64   `gorm:"column:year" json:"year"`
+		Month       int64   `gorm:"column:month" json:"month"`
+		Name        string  `gorm:"column:name" json:"name"`
+		OrgTypeID   int64   `gorm:"column:org_type_id" json:"orgTypeId"`
+		OrgName     string  `gorm:"column:org_name" json:"orgName"`
+		ProviderID  int64   `gorm:"column:provider_id" json:"providerId"`
+		CustomerID  int64   `gorm:"column:customer_id" json:"customerId"`
+		StatusID    int64   `gorm:"column:status_id" json:"statusId"`
 	}
 
 	// Invoice request and response
 	BpayInvoiceCreateRequest struct {
-		BillIds []int `json:"billIds"`
+		BillIDs []int64 `json:"billIds"`
 	}
 	BpayInvoiceResponse struct {
 		BpayResponse
 		ID          int64          `json:"id"`
-		TotalAmount int            `json:"totalAmount"`
-		CustomerID  int            `json:"customerId"`
-		StatusID    int            `json:"statusId"`
+		TotalAmount float64        `json:"totalAmount"`
+		CustomerID  int64          `json:"customerId"`
+		StatusID    int64          `json:"statusId"`
 		BIlls       []BpayBillData `json:"bills"`
 	}
 
 	BpayInvoiceTransactionCreateRequest struct {
-		InvoiceID int    `json:"invoiceId"`
+		InvoiceID int64  `json:"invoiceId"`
 		IsOrg     bool   `json:"isOrg"`
 		VatInfo   string `json:"vatInfo"` // Company Register
 	}
