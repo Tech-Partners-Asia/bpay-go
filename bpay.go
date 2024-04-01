@@ -40,6 +40,7 @@ type Bpay interface {
 	InvoiceCreate(input BpayInvoiceCreateRequest, customerId int) (BpayInvoiceResponse, error)
 	InvoiceGroupCreate(groupId string, customerId int) (BpayInvoiceResponse, error)
 	InvoiceTransactionCreate(input BpayInvoiceTransactionCreateRequest, customerId int) (BpayInvoiceTransactionCreateResponse, error)
+	BillCheck(invoiceId string) (BpayBillCheckResponse, error)
 }
 
 func New(endpoint, username, password string) Bpay {
@@ -329,6 +330,19 @@ func (b *bpay) InvoiceTransactionCreate(input BpayInvoiceTransactionCreateReques
 	json.Unmarshal(res, &response)
 	if !response.ResponseCode {
 		return BpayInvoiceTransactionCreateResponse{}, errors.New(response.ResponseMsg)
+	}
+	return response, nil
+}
+
+func (b *bpay) BillCheck(invoiceId string) (BpayBillCheckResponse, error) {
+	res, err := b.httpRequest(nil, BpayBillCheck, invoiceId, 0)
+	if err != nil {
+		return BpayBillCheckResponse{}, err
+	}
+	var response BpayBillCheckResponse
+	json.Unmarshal(res, &response)
+	if !response.ResponseCode {
+		return BpayBillCheckResponse{}, errors.New(response.ResponseMsg)
 	}
 	return response, nil
 }

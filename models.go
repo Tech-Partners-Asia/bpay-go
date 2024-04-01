@@ -176,6 +176,14 @@ type (
 		Logo        string `json:"logo"`
 		Link        string `json:"link"`
 	}
+
+	BpayBillCheckResponse struct {
+		BpayResponse
+		Status       string `json:"status"`
+		StatusCode   int64  `json:"statusCode"`
+		StatusSystem string `json:"statusSystem"`
+	}
+
 	BpayResponse struct {
 		ResponseCode bool   `json:"responseCode"`
 		ResponseMsg  string `json:"responseMsg"`

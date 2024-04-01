@@ -113,6 +113,10 @@ var (
 		Url:    "/payment/api/v1/invoice/transaction/create",
 		Method: http.MethodPost,
 	}
+	BpayBillCheck = utils.API{
+		Url:    "/payment/api/v1/bill/check/",
+		Method: http.MethodPost,
+	}
 )
 
 func (b *bpay) auth() (authRes BpayLoginData, err error) {
