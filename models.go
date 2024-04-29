@@ -180,7 +180,7 @@ type (
 	BpayBillCheckResponse struct {
 		BpayResponse
 		Status       string `json:"status"`
-		StatusCode   int64  `json:"statusCode"`
+		StatusCode   Status `json:"statusCode"`
 		StatusSystem string `json:"statusSystem"`
 	}
 
