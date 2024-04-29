@@ -108,10 +108,10 @@ type (
 		Data []BpayAddressData `json:"data"`
 	}
 	BpayAddressData struct {
-		Name    string `json:"name"`
-		CID     string `json:"cid"`
-		Address string `json:"address"`
-		Count   int64  `json:"count"`
+		Name    string `gorm:"column:name" json:"name"`
+		CID     string `gorm:"column:cid" json:"cid"`
+		Address string `gorm:"column:address" json:"address"`
+		Count   int64  `gorm:"column:count" json:"count"`
 	}
 
 	BpayFindResponse struct {

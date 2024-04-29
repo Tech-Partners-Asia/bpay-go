@@ -114,7 +114,7 @@ var (
 		Method: http.MethodPost,
 	}
 	BpayBillCheck = utils.API{
-		Url:    "/payment/api/v1/bill/check/",
+		Url:    "/payment/api/v1/merchant/bill/check/",
 		Method: http.MethodPost,
 	}
 )
