@@ -164,6 +164,8 @@ type (
 		StatusID            int64          `json:"statusId"`
 		PaymentMethodID     int64          `json:"paymentMethodId"`
 		TransactionMethodID int64          `json:"transactionMethodId"`
+		MerchantID          int64          `json:"MerchantId"`
+		ProviderMerchantID  string         `json:"providerMerchantId"`
 		CreatedAt           time.Time      `json:"createdAt"`
 		UpdateAt            time.Time      `json:"updateAt"`
 		BIlls               []BpayBillData `json:"bills"`
