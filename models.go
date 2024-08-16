@@ -1,5 +1,7 @@
 package bpaygo
 
+import "time"
+
 type (
 
 	// login request and response
@@ -150,11 +152,21 @@ type (
 	}
 	BpayInvoiceResponse struct {
 		BpayResponse
-		ID          int64          `json:"id"`
-		TotalAmount float64        `json:"totalAmount"`
-		CustomerID  int64          `json:"customerId"`
-		StatusID    int64          `json:"statusId"`
-		BIlls       []BpayBillData `json:"bills"`
+		Data BpayInvoiceData `json:"data"`
+	}
+
+	BpayInvoiceData struct {
+		ID                  int64          `json:"id"`
+		TotalAmount         float64        `json:"total_amount"`
+		IsOrg               bool           `json:"isOrg"`
+		VatInfo             string         `json:"vatInfo"`
+		CustomerID          int64          `json:"customerId"`
+		StatusID            int64          `json:"statusId"`
+		PaymentMethodID     int64          `json:"paymentMethodId"`
+		TransactionMethodID int64          `json:"transactionMethodId"`
+		CreatedAt           time.Time      `json:"createdAt"`
+		UpdateAt            time.Time      `json:"updateAt"`
+		BIlls               []BpayBillData `json:"bills"`
 	}
 
 	BpayInvoiceTransactionCreateRequest struct {
@@ -164,6 +176,10 @@ type (
 	}
 	BpayInvoiceTransactionCreateResponse struct {
 		BpayResponse
+		Data BpayInvoiceTransactionData `json:"data"`
+	}
+
+	BpayInvoiceTransactionData struct {
 		InvoiceID    string        `json:"invoiceId"`
 		QrText       string        `json:"qr_text"`
 		QrImage      string        `json:"qr_image"`
@@ -179,21 +195,24 @@ type (
 
 	BpayBillCheckResponse struct {
 		BpayResponse
+		Data BpayBillCheckData `json:"data"`
+	}
+	BpayBillCheckData struct {
 		Status       string    `json:"status"`
 		StatusCode   Status    `json:"statusCode"`
 		StatusSystem string    `json:"statusSystem"`
 		Vats         []BpayVat `json:"vats"`
 	}
 	BpayVat struct {
-		TotalAmount    float64 `json: "total_amount"`
-		VatCid         string  `json: "vatCid"`
-		VatTransId     int     `json: "vatTransId"`
-		VatGroupBillId string  `json: "vatGroupBillId"`
-		VatGroupDate   string  `json: "vatGroupDate"`
-		VatGroupQrData string  `json: "vatGroupQrData"`
-		VatLottery     string  `json: "vatLottery"`
-		VatAmount      string  `json: "vatAmount"`
-		VatData        *string `json: "vatData"`
+		TotalAmount    float64 `json:"total_amount"`
+		VatCid         string  `json:"vatCid"`
+		VatTransId     int     `json:"vatTransId"`
+		VatGroupBillId string  `json:"vatGroupBillId"`
+		VatGroupDate   string  `json:"vatGroupDate"`
+		VatGroupQrData string  `json:"vatGroupQrData"`
+		VatLottery     string  `json:"vatLottery"`
+		VatAmount      string  `json:"vatAmount"`
+		VatData        *string `json:"vatData"`
 	}
 	BpayResponse struct {
 		ResponseCode bool   `json:"responseCode"`
