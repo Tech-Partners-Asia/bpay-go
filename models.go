@@ -179,11 +179,22 @@ type (
 
 	BpayBillCheckResponse struct {
 		BpayResponse
-		Status       string `json:"status"`
-		StatusCode   Status `json:"statusCode"`
-		StatusSystem string `json:"statusSystem"`
+		Status       string    `json:"status"`
+		StatusCode   Status    `json:"statusCode"`
+		StatusSystem string    `json:"statusSystem"`
+		Vats         []BpayVat `json:"vats"`
 	}
-
+	BpayVat struct {
+		TotalAmount    float64 `json: "total_amount"`
+		VatCid         string  `json: "vatCid"`
+		VatTransId     int     `json: "vatTransId"`
+		VatGroupBillId string  `json: "vatGroupBillId"`
+		VatGroupDate   string  `json: "vatGroupDate"`
+		VatGroupQrData string  `json: "vatGroupQrData"`
+		VatLottery     string  `json: "vatLottery"`
+		VatAmount      string  `json: "vatAmount"`
+		VatData        *string `json: "vatData"`
+	}
 	BpayResponse struct {
 		ResponseCode bool   `json:"responseCode"`
 		ResponseMsg  string `json:"responseMsg"`
