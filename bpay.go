@@ -230,7 +230,7 @@ func (b *bpay) FindAddress(aimagId, sumId, khorooId, bairNum, haalgaNum, custome
 }
 
 func (b *bpay) FindCid(cId string, customerId int) (BpayFindResponse, error) {
-	res, err := b.httpRequest(nil, BpayFindCid, "Cid="+cId, customerId)
+	res, err := b.httpRequest(nil, BpayFindCid, cId, customerId)
 	if err != nil {
 		return BpayFindResponse{}, err
 	}
@@ -243,7 +243,7 @@ func (b *bpay) FindCid(cId string, customerId int) (BpayFindResponse, error) {
 }
 
 func (b *bpay) FindElectric(userId string, customerId int) (BpayFindResponse, error) {
-	res, err := b.httpRequest(nil, BpayFindElectric, "UserId="+userId, customerId)
+	res, err := b.httpRequest(nil, BpayFindElectric, userId, customerId)
 	if err != nil {
 		return BpayFindResponse{}, err
 	}
@@ -256,7 +256,7 @@ func (b *bpay) FindElectric(userId string, customerId int) (BpayFindResponse, er
 }
 
 func (b *bpay) FindUnivision(custNo string, customerId int) (BpayFindResponse, error) {
-	res, err := b.httpRequest(nil, BpayFindElectric, "Custno="+custNo, customerId)
+	res, err := b.httpRequest(nil, BpayFindElectric, custNo, customerId)
 	if err != nil {
 		return BpayFindResponse{}, err
 	}
@@ -269,7 +269,7 @@ func (b *bpay) FindUnivision(custNo string, customerId int) (BpayFindResponse, e
 }
 
 func (b *bpay) FindSkymedia(billerUserId string, customerId int) (BpayFindResponse, error) {
-	res, err := b.httpRequest(nil, BpayFindSkymedia, "BillerUserId="+billerUserId, customerId)
+	res, err := b.httpRequest(nil, BpayFindSkymedia, billerUserId, customerId)
 	if err != nil {
 		return BpayFindResponse{}, err
 	}
@@ -282,7 +282,7 @@ func (b *bpay) FindSkymedia(billerUserId string, customerId int) (BpayFindRespon
 }
 
 func (b *bpay) FindOnlineBiller(billerUserId string, customerId int) (BpayFindResponse, error) {
-	res, err := b.httpRequest(nil, BpayFindOnlineBiller, "BillerUserId="+billerUserId, customerId)
+	res, err := b.httpRequest(nil, BpayFindOnlineBiller, billerUserId, customerId)
 	if err != nil {
 		return BpayFindResponse{}, err
 	}

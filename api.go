@@ -80,23 +80,23 @@ var (
 		Method: http.MethodGet,
 	}
 	BpayFindCid = utils.API{
-		Url:    "/search/api/v1/Search/FindCid?Cid={{cid}}",
+		Url:    "/search/api/v1/Search/FindCid?Cid=",
 		Method: http.MethodGet,
 	}
 	BpayFindElectric = utils.API{
-		Url:    "/search/api/v1/Search/FindElictric?UserId={{userId}}",
+		Url:    "/search/api/v1/Search/FindElictric?UserId=",
 		Method: http.MethodGet,
 	}
 	BpayFindUnivision = utils.API{
-		Url:    "/search/api/v1/Search/FindUnivision?Custno={{custNo}}",
+		Url:    "/search/api/v1/Search/FindUnivision?Custno=",
 		Method: http.MethodGet,
 	}
 	BpayFindSkymedia = utils.API{
-		Url:    "/search/api/v1/Search/FindSkymedia?BillerUserId={{billerUserId}}",
+		Url:    "/search/api/v1/Search/FindSkymedia?BillerUserId=",
 		Method: http.MethodGet,
 	}
 	BpayFindOnlineBiller = utils.API{
-		Url:    "/search/api/v1/Search/FindOnlineBiller?BillerUserId={{billerUserId}}",
+		Url:    "/search/api/v1/Search/FindOnlineBiller?BillerUserId=",
 		Method: http.MethodGet,
 	}
 
