@@ -1,10 +1,10 @@
 package utils
 
 const (
-	NewStatus          string = "1000"
-	PaidStatus         string = "1001"
-	CancelledStatus    string = "1002"
-	PayingStaus        string = "1003"
-	ProviderPaidStatus string = "1004"
-	ErrorStatus        string = "1005"
+	NewStatus          int64 = 1000
+	PaidStatus         int64 = 1001
+	CancelledStatus    int64 = 1002
+	PayingStaus        int64 = 1003
+	ProviderPaidStatus int64 = 1004
+	ErrorStatus        int64 = 1005
 )
